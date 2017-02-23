@@ -6,16 +6,18 @@ import time
 
 Lim = 40
 
-fig, ax = plt.subplots()
-line, = ax.plot([], [], lw=2)
+fig, ax = plt.subplots(facecolor = '#333333')
+line, = ax.plot([], [], lw=2,  color = 'y')
 
-plt.title('Grafico per il monitoraggio delle magnitudo')
+plt.title('Grafico per il monitoraggio delle magnitudo', color = 'w')
+
+ax.set_facecolor('#333333')
 
 ax.set_ylim(-12000, 12000)
-plt.ylabel('Magnitudo')
+plt.ylabel('Magnitudo', color = 'w')
 
 ax.set_xlim(0, 60)
-plt.xlabel('Tempo')
+plt.xlabel('Tempo', color = 'w')
 
 ax.grid()
 
