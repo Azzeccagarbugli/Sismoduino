@@ -1,10 +1,8 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-# import serial
-# import numpy as np
-# import time
-import random
-
+import serial
+import numpy as np
+import time
 
 # Configurazione grafico
 fig, ax = plt.subplots(facecolor='#333333')
@@ -16,44 +14,47 @@ plt.title('Grafico per il monitoraggio delle magnitudo', color='w')
 # Asse X
 ax.set_xlim(0, 60)
 plt.xlabel('Tempo', color='w')
+ax.spines['bottom'].set_color('white')
 
 # Asse y
 ax.set_ylim(-12000, 12000)
 plt.ylabel('Magnitudo', color='w')
+ax.spines['left'].set_color('white')
 
 ax.set_facecolor('#333333')
 ax.grid()
 
-xdata, ydata = [], []
+xdata, ydata = [0]*100, [0]*100
 
-# Open serial USB
-# raw = serial.Serial("/dev/ttyACM0", 9600)
+raw = serial.Serial("/dev/ttyACM0", 9600)
 
+
+def update(data):
+    line.set_ydata(data)
+    return line,
 
 def run(data):
-    t, y = data
+    t,y = data
+    del xdata[0]
+    del ydata[0]
     xdata.append(t)
     ydata.append(y)
     line.set_data(xdata, ydata)
 
-    return line
-
+    return line,
 
 def data_gen():
     t = 0
-
+    Lim = 0
     while True:
         t += 0.2
-        ax.set_xlim(t-30, t+30)
-
+        Lim += 0.2
+        ax.set_xbound(Lim-30, Lim+30)
         try:
-            # val = int(raw.readline())
-            val = random.random() * 8000
+            dat = int(raw.readline())
         except:
-            val = 0
-
-        yield t, val
-
+            dat = 0
+        yield t, dat
 
 ani = animation.FuncAnimation(fig, run, data_gen, interval=0)
 plt.show(block=True)
