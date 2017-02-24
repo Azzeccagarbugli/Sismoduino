@@ -1,0 +1,5 @@
+matplotlib
+pyserial
+
+ipython
+PyQt5
