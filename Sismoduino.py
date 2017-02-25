@@ -19,8 +19,9 @@ plt.title('Grafico per il monitoraggio delle magnitudo', color='w')
 
 # Settaggi asse X
 ax.set_xlim(0, 60)
-plt.xlabel('Tempo', color='w')
 ax.spines['bottom'].set_color('white')
+ax.spines['top'].set_alpha(0.1)
+ax.tick_params(axis='x', which='both', bottom='off', top='off', labelbottom='off')
 for t in ax.xaxis.get_ticklines():
     t.set_color('white')
     t.set_alpha(0.3)
@@ -29,6 +30,8 @@ for t in ax.xaxis.get_ticklines():
 ax.set_ylim(-12000, 12000)
 plt.ylabel('Magnitudo', color='w')
 ax.spines['left'].set_color('white')
+ax.spines['right'].set_alpha(0.1)
+ax.tick_params(axis='y', colors='white')
 for t in ax.yaxis.get_ticklines():
     t.set_color('white')
     t.set_alpha(0.3)
