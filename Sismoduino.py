@@ -15,7 +15,7 @@ c2 = Color('red')
 c_int = list(c1.range_to(c2, 10022))
 
 # Titolo
-plt.title('Grafico per il monitoraggio delle magnitudo', color='w')
+#plt.title('Grafico per il monitoraggio delle magnitudo', color='w')
 
 # Settaggi asse X
 ax.set_xlim(0, 60)
@@ -28,7 +28,7 @@ for t in ax.xaxis.get_ticklines():
 
 # Settaggi asse y
 ax.set_ylim(-12000, 12000)
-plt.ylabel('Magnitudo', color='w')
+#plt.ylabel('Magnitudo', color='w')
 ax.spines['left'].set_color('white')
 ax.spines['right'].set_alpha(0.1)
 ax.tick_params(axis='y', colors='white')
@@ -87,12 +87,27 @@ def run(data):
 def data_gen():
     t = 0
     Lim = 0
+    Mag_Max = 3.0
     while True:
         t += 0.2
         Lim += 0.2
         ax.set_xbound(Lim-20, Lim+20)
         try:
             dat = int(raw.readline())
+            # Ottengo la magnitudo massima in una sessione di monitoraggio
+            if abs(dat) > Mag_Max:
+                Mag_Max = dat
+                print(Mag_Max/1000)
+                # PROVE PER LA STAMPA DEL VALORE MASSIMO SUL GRAFICO
+                # ISSUE: LAG ESAGERATO CHE PORTA A UN DELAY ASSURDO
+                # DEL GRAFICO STESSO, CAN WE IMPROVE THIS FUNCTION?
+                # plt.text(0.9, 0.9, Mag_Max,
+                #     horizontalalignment='center',
+                #     verticalalignment='center',
+                #     transform=ax.transAxes,
+                #     fontsize=22,
+                #     bbox=dict(facecolor='black', alpha=0.5))
+
         except:
             dat = 0
         yield t, dat
