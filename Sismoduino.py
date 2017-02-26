@@ -6,7 +6,7 @@ import numpy as np
 import time
 
 # Configurazione grafico
-fig, ax = plt.subplots(facecolor='#333333')
+fig, ax = plt.subplots(facecolor='#191919')
 line, = ax.plot([], [], lw=2,  color='green')
 
 # Configurazioni colori
@@ -37,7 +37,7 @@ for t in ax.yaxis.get_ticklines():
     t.set_alpha(0.3)
 
 # Colore sfondo e griglia
-ax.set_facecolor('#333333')
+ax.set_facecolor('#191919')
 ax.grid(alpha=0.3)
 
 # Dati iniziali settati a zero
@@ -87,7 +87,7 @@ def run(data):
 def data_gen():
     t = 0
     Lim = 0
-    Mag_Max = 3.0
+    Mag_Max = 0
     while True:
         t += 0.2
         Lim += 0.2
@@ -95,9 +95,11 @@ def data_gen():
         try:
             dat = int(raw.readline())
             # Ottengo la magnitudo massima in una sessione di monitoraggio
-            if abs(dat) > Mag_Max:
+            if abs(dat) >= Mag_Max:
                 Mag_Max = dat
-                print(Mag_Max/1000)
+                Mag_Max = abs(Mag_Max)
+
+            print(Mag_Max/1000)
                 # PROVE PER LA STAMPA DEL VALORE MASSIMO SUL GRAFICO
                 # ISSUE: LAG ESAGERATO CHE PORTA A UN DELAY ASSURDO
                 # DEL GRAFICO STESSO, CAN WE IMPROVE THIS FUNCTION?
