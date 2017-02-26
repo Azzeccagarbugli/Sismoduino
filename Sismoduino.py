@@ -61,6 +61,15 @@ def run(data):
 
     line.set_data(xdata, ydata)
 
+    # Modifiche valori lungo l'asse Y, la lettera 'M' sta per Magnitudo
+    labels_axisy = [item.get_text() for item in ax.get_yticklabels()]
+    labels_axisy[1] = '-10M'
+    labels_axisy[2] = '-5M'
+    labels_axisy[3] = '0M'
+    labels_axisy[4] = '5M'
+    labels_axisy[5] = '10M'
+    ax.set_yticklabels(labels_axisy)
+
     # Gradiente di colorazione in base al valore della magnitudo
     if abs(y) >= 10022:
         try:
