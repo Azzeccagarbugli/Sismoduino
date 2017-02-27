@@ -2,3 +2,4 @@ matplotlib
 pyserial
 ipython
 PyQt5
+colour
