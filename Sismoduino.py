@@ -2,12 +2,25 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from colour import Color
 import serial
+import json
 import numpy as np
 import time
+from TwitterAPI import TwitterAPI
+import datetime
+
+# Configurazione Twitter
+try:
+    with open('credentials.json') as data_file:
+        data = (json.load(data_file))["twitter"]
+    api = TwitterAPI(data["key"], data["key_secret"], data["token"], data["token_secret"])
+    print("Twitter configurato correttamente")
+except:
+    print("Si è verificato un errore nella configurazione di twitter")
+last_tweet = None
 
 # Configurazione grafico
 fig, ax = plt.subplots(facecolor='#191919')
-line, = ax.plot([], [], lw=2,  color='green')
+line, = ax.plot([], [], lw=2, color='green')
 
 # Configurazioni colori
 c1 = Color('green')
@@ -46,6 +59,14 @@ xdata, ydata = [0]*100, [0]*100
 # Dichirazione porta seriale per Arduino
 raw = serial.Serial("/dev/ttyACM0", 9600)
 
+def tweet(data):
+    msg = "Ho appena registrato una magnitudo massima di {0} con #sismoduino".format(data/1000)
+    try:
+        global last_tweet
+        last_tweet = datetime.datetime.now()
+        r = api.request('statuses/update', {'status': msg})
+    except:
+        pass
 
 def update(data):
     line.set_ydata(data)
@@ -53,7 +74,7 @@ def update(data):
     return line,
 
 def run(data):
-    t,y = data
+    t, y = data
     del xdata[0]
     del ydata[0]
     xdata.append(t)
@@ -98,6 +119,10 @@ def data_gen():
             if abs(dat) >= Mag_Max:
                 Mag_Max = dat
                 Mag_Max = abs(Mag_Max)
+                now = datetime.datetime.now()
+                print()
+                if last_tweet is None or ((now-last_tweet).seconds)/60 >= 5:
+                    tweet(Mag_Max)
 
             print(Mag_Max/1000)
                 # PROVE PER LA STAMPA DEL VALORE MASSIMO SUL GRAFICO
