@@ -16,6 +16,7 @@ try:
     print("Twitter configurato correttamente")
 except:
     print("Si è verificato un errore nella configurazione di twitter")
+
 last_tweet = None
 
 # Configurazione grafico
@@ -120,11 +121,14 @@ def data_gen():
                 Mag_Max = dat
                 Mag_Max = abs(Mag_Max)
                 now = datetime.datetime.now()
-                print()
+                plt.tight_layout()
+                plt.savefig('PlotSavedImages/MAG_MAX_SISMODUINO.png',
+                    bbox_inches='tight',
+                    pad_inches=0.1)
                 if last_tweet is None or ((now-last_tweet).seconds)/60 >= 5:
                     tweet(Mag_Max)
 
-            print(Mag_Max/1000)
+                print(Mag_Max/1000)
                 # PROVE PER LA STAMPA DEL VALORE MASSIMO SUL GRAFICO
                 # ISSUE: LAG ESAGERATO CHE PORTA A UN DELAY ASSURDO
                 # DEL GRAFICO STESSO, CAN WE IMPROVE THIS FUNCTION?
