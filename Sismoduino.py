@@ -8,6 +8,9 @@ import time
 from TwitterAPI import TwitterAPI
 import datetime
 
+# Configurazione path immagine
+IMG_FILENAME = "PlotSavedImages/MAG_MAX_SISMODUINO.png"
+
 # Configurazione Twitter
 try:
     with open('credentials.json') as data_file:
@@ -61,11 +64,16 @@ xdata, ydata = [0]*100, [0]*100
 raw = serial.Serial("/dev/ttyACM0", 9600)
 
 def tweet(data):
+    # Lettura ed invio grafico e magnitudo massima
     msg = "Ho appena registrato una magnitudo massima di {0} con #sismoduino".format(data/1000)
     try:
+        file = open(IMG_FILENAME, 'rb')
+        img = file.read()
+        r = api.request('statuses/update_with_media',
+                {'status': msg},
+                {'media[]': img})
         global last_tweet
         last_tweet = datetime.datetime.now()
-        r = api.request('statuses/update', {'status': msg})
     except:
         pass
 
@@ -122,7 +130,7 @@ def data_gen():
                 Mag_Max = abs(Mag_Max)
                 now = datetime.datetime.now()
                 plt.tight_layout()
-                plt.savefig('PlotSavedImages/MAG_MAX_SISMODUINO.png',
+                plt.savefig(IMG_FILENAME,
                     bbox_inches='tight',
                     pad_inches=0.1)
                 if last_tweet is None or ((now-last_tweet).seconds)/60 >= 5:
