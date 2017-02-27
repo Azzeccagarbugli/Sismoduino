@@ -3,3 +3,4 @@ pyserial
 ipython
 PyQt5
 colour
+TwitterApi
