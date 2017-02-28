@@ -133,7 +133,7 @@ def data_gen():
                 plt.savefig(IMG_FILENAME,
                     bbox_inches='tight',
                     pad_inches=0.1)
-                if last_tweet is None or ((now-last_tweet).seconds)/60 >= 5:
+                if last_tweet is None or ((now-last_tweet).seconds)/60 >= 30:
                     tweet(Mag_Max)
 
                 print(Mag_Max/1000)
