@@ -29,7 +29,7 @@ line, = ax.plot([], [], lw=2, color='green')
 # Configurazioni colori
 c1 = Color('green')
 c2 = Color('red')
-c_int = list(c1.range_to(c2, 10022))
+c_int = list(c1.range_to(c2, 5500))
 
 # Titolo
 #plt.title('Grafico per il monitoraggio delle magnitudo', color='w')
@@ -101,9 +101,9 @@ def run(data):
     ax.set_yticklabels(labels_axisy)
 
     # Gradiente di colorazione in base al valore della magnitudo
-    if abs(y) >= 10022:
+    if abs(y) >= 5422:
         try:
-            line.set_color(color=c_int[10021].rgb)
+            line.set_color(color=c_int[5500].rgb)
         except:
             pass
     else:
@@ -119,8 +119,8 @@ def data_gen():
     Lim = 0
     Mag_Max = 0
     while True:
-        t += 0.2
-        Lim += 0.2
+        t += 0.25
+        Lim += 0.25
         ax.set_xbound(Lim-20, Lim+20)
         try:
             dat = int(raw.readline())
