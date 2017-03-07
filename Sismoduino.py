@@ -1,11 +1,12 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import pyscreenshot as ImageGrab
+from TwitterAPI import TwitterAPI
 from colour import Color
 import serial
 import json
 import numpy as np
 import time
-from TwitterAPI import TwitterAPI
 import datetime
 
 # Configurazione path immagine
@@ -30,9 +31,6 @@ line, = ax.plot([], [], lw=2, color='green')
 c1 = Color('green')
 c2 = Color('red')
 c_int = list(c1.range_to(c2, 5500))
-
-# Titolo
-#plt.title('Grafico per il monitoraggio delle magnitudo', color='w')
 
 # Settaggi asse X
 ax.set_xlim(0, 60)
@@ -129,13 +127,10 @@ def data_gen():
                 Mag_Max = dat
                 Mag_Max = abs(Mag_Max)
                 now = datetime.datetime.now()
-                plt.tight_layout()
-                plt.savefig(IMG_FILENAME,
-                    bbox_inches='tight',
-                    pad_inches=0.1)
+                im = ImageGrab.grab(bbox=(30,130,640,590))
+                im.save(IMG_FILENAME)
                 if last_tweet is None or ((now-last_tweet).seconds)/60 >= 30:
                     tweet(Mag_Max)
-
                 print(Mag_Max/1000)
                 # PROVE PER LA STAMPA DEL VALORE MASSIMO SUL GRAFICO
                 # ISSUE: LAG ESAGERATO CHE PORTA A UN DELAY ASSURDO
@@ -152,4 +147,5 @@ def data_gen():
         yield t, dat
 
 ani = animation.FuncAnimation(fig, run, data_gen, interval=0)
+plt.tight_layout()
 plt.show(block=True)
