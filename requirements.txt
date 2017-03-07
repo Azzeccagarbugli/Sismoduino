@@ -4,3 +4,4 @@ ipython
 PyQt5
 colour
 TwitterApi
+pyscreenshot
