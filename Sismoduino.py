@@ -19,7 +19,7 @@ try:
     api = TwitterAPI(data["key"], data["key_secret"], data["token"], data["token_secret"])
     print("Twitter configurato correttamente")
 except:
-    print("Si è verificato un errore nella configurazione di twitter")
+    print("Si è verificato un errore nella configurazione di Twitter")
 
 last_tweet = None
 
@@ -63,7 +63,7 @@ raw = serial.Serial("/dev/ttyACM0", 9600)
 
 def tweet(data):
     # Lettura ed invio grafico e magnitudo massima
-    msg = "Ho appena registrato una magnitudo massima di {0} con #sismoduino".format(data/1000)
+    msg = "Sismoduino ha rilevato una magnitudo di intensità {0} sulla scala Richter nella città di Fabriano".format(data/1000)
     try:
         file = open(IMG_FILENAME, 'rb')
         img = file.read()
@@ -101,12 +101,12 @@ def run(data):
     # Gradiente di colorazione in base al valore della magnitudo
     if abs(y) >= 5422:
         try:
-            line.set_color(color=c_int[5500].rgb)
+            line.set_color(color = c_int[5500].rgb)
         except:
             pass
     else:
         try:
-            line.set_color(color=c_int[abs(y)].rgb)
+            line.set_color(color = c_int[abs(y)].rgb)
         except:
             pass
 
@@ -127,9 +127,9 @@ def data_gen():
                 Mag_Max = dat
                 Mag_Max = abs(Mag_Max)
                 now = datetime.datetime.now()
-                im = ImageGrab.grab(bbox=(30,130,640,590))
-                im.save(IMG_FILENAME)
-                if last_tweet is None or ((now-last_tweet).seconds)/60 >= 30:
+                im = ImageGrab.grab(bbox = (30,130,640,590))
+                im.save(IMG_FILENAME, quality = 100)
+                if last_tweet is None or ((now-last_tweet).seconds)/60 >= 120:
                     tweet(Mag_Max)
                 print(Mag_Max/1000)
                 # PROVE PER LA STAMPA DEL VALORE MASSIMO SUL GRAFICO
