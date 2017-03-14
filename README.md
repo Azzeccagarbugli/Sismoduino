@@ -14,17 +14,19 @@ In questo modo è nato Sismoduino.
 
 La componente informatica ed elettroica è fondamentale in questo progetto. Infatti l'intera struttura si basa su Arduino, un microcontrollore capace di elaborare grandi moli di dati in pochi secondi, moli di dati che vengono ricevute dall'accellerometro MPU6050 che grazie alla formula matematica che descrive l'andamento della magnitudo riesce a convertire le oscillazioni del terreno in valori scalari misurati lungo la scala Richter.
 
-### Installazione
+## Installazione
 
-Per provare Sismoduino occorre:
+Per provare Sismoduino occorre installare in primo luogo le dipendenze dello script:
 
-* _sudo pip install -r requirements.txt_
-* _ipython --matplotlib=qt5 Sismoduino.py_
+`sudo pip install -r requirements.txt`
 
-### TODO
+e in seguito, lanciare lo script stesso in iPython:
 
-- [ ] Bot su Telegram
-- [ ] Creazione della WebApp
-- [ ] Miglioramento parte estetica del grafico
-- [x] Invio dei valori su Twitter
-- [x] Grafico in realtime che monitora l'andamento della mangitudo
+`ipython --matplotlib=qt5 Sismoduino.py_`
+
+## Ringraziamenti
+
+@Radeox
+@lorenzofar
+@YelFlash
+@sd3ntato
