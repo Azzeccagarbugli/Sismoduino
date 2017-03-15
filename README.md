@@ -22,7 +22,7 @@ Per provare Sismoduino occorre installare in primo luogo le dipendenze dello scr
 
 e in seguito, lanciare lo script stesso in iPython:
 
-`ipython --matplotlib=qt5 Sismoduino.py_`
+`ipython --matplotlib=qt5 Sismoduino.py`
 
 ## Ringraziamenti
 
