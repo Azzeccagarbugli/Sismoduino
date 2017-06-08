@@ -27,6 +27,9 @@ last_tweet = None
 fig, ax = plt.subplots(facecolor='#191919')
 line, = ax.plot([], [], lw=2, color='green')
 
+# Set per il nome finestra
+fig.canvas.set_window_title('Sismoduino')
+
 # Configurazioni colori
 c1 = Color('green')
 c2 = Color('red')
@@ -115,23 +118,21 @@ def run(data):
 def data_gen():
     t = 0
     Lim = 0
-    Mag_Max = 0
+    Mag_Max = 0.1
     while True:
         t += 0.25
         Lim += 0.25
         ax.set_xbound(Lim-20, Lim+20)
         try:
-            dat = int(raw.readline())
+            dat = int(float(raw.readline()))
             # Ottengo la magnitudo massima in una sessione di monitoraggio
             if abs(dat) >= Mag_Max:
-                Mag_Max = dat
-                Mag_Max = abs(Mag_Max)
+                Mag_Max = abs(dat)
                 now = datetime.datetime.now()
                 im = ImageGrab.grab(bbox = (30,130,640,590))
                 im.save(IMG_FILENAME, quality = 100)
                 if last_tweet is None or ((now-last_tweet).seconds)/60 >= 120:
                     tweet(Mag_Max)
-                print(Mag_Max/1000)
                 # PROVE PER LA STAMPA DEL VALORE MASSIMO SUL GRAFICO
                 # ISSUE: LAG ESAGERATO CHE PORTA A UN DELAY ASSURDO
                 # DEL GRAFICO STESSO, CAN WE IMPROVE THIS FUNCTION?
