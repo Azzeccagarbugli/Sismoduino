@@ -125,6 +125,7 @@ def data_gen():
         ax.set_xbound(Lim-20, Lim+20)
         try:
             dat = int(float(raw.readline()))
+            print(dat/1000)
             # Ottengo la magnitudo massima in una sessione di monitoraggio
             if abs(dat) >= Mag_Max:
                 Mag_Max = abs(dat)
