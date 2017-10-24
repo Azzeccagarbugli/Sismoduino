@@ -25,8 +25,8 @@ e in seguito, lanciare lo script stesso in iPython:
 `ipython --matplotlib=qt5 Sismoduino.py`
 
 ## Ringraziamenti
-
-@Radeox
-@lorenzofar
-@YelFlash
-@sd3ntato
+ 
+[Dawid Weglarz](http://www.github.com/radeox "@radeox")
+[Lorenzo Farinelli](http://www.github.com/lorenzofar "@lorenzofar")
+[Valerio Mariani](http://www.github.com/sd3ntato "@sd3ntato")
+Antonio Strippoli
