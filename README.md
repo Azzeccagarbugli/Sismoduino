@@ -26,7 +26,7 @@ e in seguito, lanciare lo script stesso in iPython:
 
 ## Ringraziamenti
  
-[Dawid Weglarz](http://www.github.com/radeox "@radeox")
-[Lorenzo Farinelli](http://www.github.com/lorenzofar "@lorenzofar")
-[Valerio Mariani](http://www.github.com/sd3ntato "@sd3ntato")
-Antonio Strippoli
+- [Dawid Weglarz](http://www.github.com/radeox "@radeox")
+- [Lorenzo Farinelli](http://www.github.com/lorenzofar "@lorenzofar")
+- [Valerio Mariani](http://www.github.com/sd3ntato "@sd3ntato")
+- Antonio Strippoli
